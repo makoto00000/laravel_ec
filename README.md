@@ -15,31 +15,31 @@
 git clone https://github.com/makoto00000/laravel_dev_container.git
 ```
 
-Laravelプロジェクトを入れるsrcディレクトリを作成
+### 2. Laravelプロジェクトを入れるsrcディレクトリを作成
 
 ```shell
 mkdir src
 ```
 
-### 2. コンテナを起動
+### 3. コンテナを起動
 
 ```shell
-docker-compose up -d
+docker-compose up -d --build
 ```
 
-### 3. コンテナに入る
+### 4. コンテナに入る
 
 ```shell
-docker-compose exec app bash
+docker-compose exec php bash
 ```
 
-### 4. laravelインストール
+### 5. laravelインストール
 
 ```shell
 composer create-project --prefer-dist laravel/laravel ."
 ```
 
-### 5. 環境ファイル修正
+### 6. 環境ファイル修正
 
 `.env`を編集
 
@@ -54,28 +54,13 @@ DB_PASSWORD=password
 
 `DB_DATABASE`は適宜変更
 
-### 6. マイグレーション
+### 7. マイグレーション
 
 ```shell
 php artisan migrate
 ```
 
-### 7. composer install
-
-`docker/php/Dockerfile`14行目のコメントアウトを外す
-
-```Dockerfile
-RUN composer install
-```
-
-### 8. 再ビルド
-
-```shell
-docker-compose down
-docker-compose up -d --build
-```
-
-### 9. アクセス
+### 8. アクセス
 
 - Laravel:
 <http://localhost:8000>
