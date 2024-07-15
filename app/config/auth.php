@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'users',
         'passwords' => 'users',
     ],
 
@@ -38,7 +38,22 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'users', 
+        ],
+
+        'users' => [
+            'driver' => 'session', // 認証状態の管理方法
+            'provider' => 'users', // 認証方法
+        ],
+
+        'owners' => [
+            'driver' => 'session',
+            'provider' => 'owners',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
         ],
     ],
 
@@ -61,8 +76,16 @@ return [
 
     'providers' => [
         'users' => [
+            'driver' => 'eloquent', // 
+            'model' => App\Models\User::class, // 誰をログインさせるか
+        ],
+        'owners' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Owner::class,
+        ],
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [
@@ -90,6 +113,20 @@ return [
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
+            'expire' => 60, // ログイン期限60日間
+            'throttle' => 60, // ログイン失敗時に60秒ロック
+        ],
+
+        'owners' => [
+            'provider' => 'owners',
+            'table' => 'owner_password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'admin' => [
+            'provider' => 'admin',
+            'table' => 'admin_password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],
