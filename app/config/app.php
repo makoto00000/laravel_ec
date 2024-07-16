@@ -13,6 +13,7 @@ return [
     |
     */
 
+    // envファイルに第一引数で指定した値がなければ、第二引数を使用する。
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
