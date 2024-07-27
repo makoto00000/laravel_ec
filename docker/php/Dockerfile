@@ -1,6 +1,6 @@
 FROM php:fpm-buster
 
-COPY ./docker/php/php.ini /usr/local/etx/php/php.ini
+COPY ./docker/php/php.ini /usr/local/etc/php/
 
 RUN apt-get update \
   && apt-get -y install git zip unzip vim
@@ -18,3 +18,5 @@ RUN apt-get install -y nodejs
 RUN if [ -f "./composer.json" ]; then \
       composer install; \
     fi
+
+CMD ["php-fpm"]
