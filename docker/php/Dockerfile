@@ -3,7 +3,9 @@ FROM php:fpm-buster
 COPY ./docker/php/php.ini /usr/local/etc/php/
 
 RUN apt-get update \
-  && apt-get -y install git zip unzip vim
+  && apt-get -y install git zip unzip vim libpng-dev libjpeg62-turbo-dev &&\
+  docker-php-ext-configure gd --with-jpeg &&\
+  docker-php-ext-install -j$(nproc) gd
 
 RUN docker-php-ext-install pdo_mysql
 
