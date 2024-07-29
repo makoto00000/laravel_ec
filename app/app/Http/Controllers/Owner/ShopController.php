@@ -9,6 +9,7 @@ use App\Models\Shop;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use App\Http\Requests\UploadImageRequest;
 
 class ShopController extends Controller
 {
@@ -40,7 +41,7 @@ class ShopController extends Controller
         $shop = Shop::findOrFail($id);
         return view('owner.shops.edit', compact('shop'));
     }
-    public function update(Request $request, $id) {
+    public function update(UploadImageRequest $request, $id) {
         $imageFile = $request->image;
         if (!is_null($imageFile) && $imageFile->isValid()) {
             // Storage::putFile('public/shops', $imageFile); リサイズなしの場合
