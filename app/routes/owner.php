@@ -39,7 +39,7 @@ middleware('auth:owners')
   ->name('shops.update');
 });
 
-Route::resource('iamges', ImageController::class)
+Route::resource('images', ImageController::class)
 ->middleware('auth:owners')->except(['show']);
 
 Route::get('/dashboard', function () {
